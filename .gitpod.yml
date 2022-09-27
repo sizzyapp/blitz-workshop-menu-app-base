@@ -1,5 +1,5 @@
 # setup app
 
 tasks:
-  - init: yarn install
+  - init: yarn install && yarn migrate
     command: yarn dev
