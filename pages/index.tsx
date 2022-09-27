@@ -7,7 +7,7 @@ import { NextLink } from "@mantine/next"
 import logout from "app/auth/mutations/logout"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 
-const Home = () => {
+const Main = () => {
   const currentUser = useCurrentUser()
   const [logoutMutation] = useMutation(logout)
 
@@ -45,16 +45,16 @@ const Home = () => {
   }
 }
 
-const HomePage = () => {
+const Home = () => {
   return (
     <div>
       <h1>Welcome to your blitz app</h1>
 
       <Suspense fallback="Loading...">
-        <Home />
+        <Main />
       </Suspense>
     </div>
   )
 }
 
-export default HomePage
+export default Home
