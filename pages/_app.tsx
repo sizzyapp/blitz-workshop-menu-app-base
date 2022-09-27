@@ -1,9 +1,10 @@
-import {ErrorFallbackProps, ErrorComponent, ErrorBoundary, AppProps} from "@blitzjs/next"
-import {AuthenticationError, AuthorizationError} from "blitz"
-import React from "react"
-import {withBlitz} from "app/blitz-client"
+import { ErrorFallbackProps, ErrorComponent, ErrorBoundary, AppProps } from "@blitzjs/next"
+import { AuthenticationError, AuthorizationError } from "blitz"
+import React, { Suspense } from "react"
+import { withBlitz } from "app/blitz-client"
+import { AppShell, Loader, MantineProvider } from "@mantine/core"
 
-function RootErrorFallback({error}: ErrorFallbackProps) {
+function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
     return <div>Error: You are not authenticated</div>
   } else if (error instanceof AuthorizationError) {
@@ -23,10 +24,23 @@ function RootErrorFallback({error}: ErrorFallbackProps) {
   }
 }
 
-function MyApp({Component, pageProps}: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary FallbackComponent={RootErrorFallback}>
-      <Component {...pageProps} />
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: "light",
+        }}
+      >
+        <AppShell>
+          <Suspense fallback={<Loader />}>
+            <Component {...pageProps} />
+          </Suspense>
+        </AppShell>
+      </MantineProvider>
     </ErrorBoundary>
   )
 }

@@ -2,6 +2,7 @@ import { useState, ReactNode, PropsWithoutRef } from "react"
 import { FormProvider, useForm, UseFormProps } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
+import { Button, Stack } from "@mantine/core"
 
 export interface FormProps<S extends z.ZodType<any, any>>
   extends Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit"> {
@@ -55,26 +56,22 @@ export function Form<S extends z.ZodType<any, any>>({
         className="form"
         {...props}
       >
-        {/* Form fields supplied as children are rendered here */}
-        {children}
+        <Stack align="flex-start">
+          {/* Form fields supplied as children are rendered here */}
+          {children}
 
-        {formError && (
-          <div role="alert" style={{ color: "red" }}>
-            {formError}
-          </div>
-        )}
+          {formError && (
+            <div role="alert" style={{ color: "red" }}>
+              {formError}
+            </div>
+          )}
 
-        {submitText && (
-          <button type="submit" disabled={ctx.formState.isSubmitting}>
-            {submitText}
-          </button>
-        )}
-
-        <style global jsx>{`
-          .form > * + * {
-            margin-top: 1rem;
-          }
-        `}</style>
+          {submitText && (
+            <Button type="submit" disabled={ctx.formState.isSubmitting}>
+              {submitText}
+            </Button>
+          )}
+        </Stack>
       </form>
     </FormProvider>
   )
