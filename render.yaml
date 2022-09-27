@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: menu-app
+    env: node
+    plan: free
+    buildCommand: yarn --frozen-lockfile --prod=false &&
+      blitz prisma migrate deploy &&
+      blitz build
+    startCommand: blitz start -p ${PORT}
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: menu-app-db
+          property: connectionString
+      - key: SESSION_SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: menu-app-db
+    plan: free
