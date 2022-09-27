@@ -26,7 +26,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
       : errors[name]?.message || errors[name]
 
     return (
-      <Input.Wrapper withAsterisk label={label} error={error}>
+      <Input.Wrapper label={label} error={error}>
         <Input disabled={isSubmitting} {...register(name)} {...props} />
       </Input.Wrapper>
     )

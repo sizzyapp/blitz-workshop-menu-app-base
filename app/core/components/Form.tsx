@@ -76,5 +76,3 @@ export function Form<S extends z.ZodType<any, any>>({
     </FormProvider>
   )
 }
-
-export default Form
