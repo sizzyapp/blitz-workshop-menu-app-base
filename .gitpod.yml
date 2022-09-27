@@ -1,3 +1,5 @@
+# setup app
+
 tasks:
   - init: yarn install
     command: yarn dev
