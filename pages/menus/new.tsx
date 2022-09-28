@@ -1,10 +1,14 @@
-import { useMutation } from "@blitzjs/rpc"
+import { useRouter } from "next/router"
+import { Routes } from "@blitzjs/next"
+import { invalidateQuery, useMutation } from "@blitzjs/rpc"
 
 import createMenuFn from "app/menu/mutations/createMenu"
+import getMenus from "app/menu/queries/getMenus"
 import { FORM_ERROR } from "app/core/components/Form"
 import { MenuForm } from "app/menu/components/MenuForm"
 
 const NewMenuPage = () => {
+  const router = useRouter()
   const [createMenu] = useMutation(createMenuFn)
 
   const onSubmit = async (data) => {
@@ -16,7 +20,8 @@ const NewMenuPage = () => {
         }
       }
 
-      console.log("Created")
+      await invalidateQuery(getMenus, undefined)
+      await router.replace(Routes.Home())
     } catch (err) {
       return { [FORM_ERROR]: err.toString() }
     }
