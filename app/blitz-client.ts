@@ -7,8 +7,8 @@ const isCodeSandbox = process.env.PWD === "/sandbox"
 export const authConfig = {
   cookiePrefix: "workshop-menu-app-base-cookie-prefix",
   ...(isCodeSandbox && {
-    sameSite: "none",
-    secureCookies: true,
+    sameSite: "none" as const,
+    secureCookies: true as const,
   }),
 }
 
