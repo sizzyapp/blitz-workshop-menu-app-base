@@ -1,12 +1,24 @@
 import React, { Suspense } from "react"
 import { Routes, useParam } from "@blitzjs/next"
+import { useQuery } from "@blitzjs/rpc"
 import { NextLink } from "@mantine/next"
+
+import getMenu from "../../../app/menu/queries/getMenu"
+import { MenuForm } from "app/menu/components/MenuForm"
 
 const MenusPage = () => {
   const id = useParam("id", "number")!
+  const [menu] = useQuery(getMenu, { id })
+
+  const onSubmit = async (data) => {
+    console.log(data)
+  }
 
   return (
-    <h1>{id}</h1>
+    <MenuForm
+      initialValues={menu}
+      onSubmit={onSubmit}
+    />
   )
 }
 
