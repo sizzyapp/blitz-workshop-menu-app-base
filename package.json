@@ -11,7 +11,7 @@
     "db:deploy": "yarn p migrate deploy",
     "db:seed": "yarn p db seed",
     "db:rebuild": "yarn p migrate reset",
-    "build": "yarn db:build && blitz build"
+    "build": "yarn db:deploy && blitz build"
   },
   "dependencies": {
     "@blitzjs/auth": "2.0.0-beta.3",
