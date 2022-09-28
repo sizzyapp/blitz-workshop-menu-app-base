@@ -5,7 +5,7 @@ import { z } from "zod"
 import db from "db"
 import { createMenuSchema } from "./createMenu"
 
-export const updateMenuSchema = z.object({ id: z.number(), data: createMenuSchema.partial() })
+export const updateMenuSchema = z.object({ id: z.number(), data: createMenuSchema })
 
 const updateMenuFn = resolver.pipe(
   resolver.zod(updateMenuSchema),
