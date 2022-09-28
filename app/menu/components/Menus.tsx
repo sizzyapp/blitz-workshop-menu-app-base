@@ -2,6 +2,7 @@ import { useQuery } from "@blitzjs/rpc"
 import { Table, Group } from "@mantine/core"
 
 import getMenus from "app/menu/queries/getMenus"
+import { DeleteMenu } from "./DeleteMenu"
 
 export const Menus = () => {
   const [menus] = useQuery(getMenus, undefined)
@@ -24,7 +25,7 @@ export const Menus = () => {
             <td>{menu.slug}</td>
             <td>
               <Group spacing="sm">
-                <h3>Buttons here</h3>
+                <DeleteMenu id={menu.id} />
               </Group>
             </td>
           </tr>
